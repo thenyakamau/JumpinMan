@@ -20,6 +20,7 @@ public class CheckPoint : MonoBehaviour
         if (obj.name == "Player" && !levelCompleted)
         {
             checkPointSoundEffect.Play();
+
             levelCompleted = true;
             Invoke("CompleteLevel", 2f);
         }

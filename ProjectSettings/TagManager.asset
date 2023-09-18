@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bananas
   - Trap
+  - FallDetector
   layers:
   - Default
   - TransparentFX
