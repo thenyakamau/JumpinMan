@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rigidbodyItem;
 
     [SerializeField] AudioSource deathSoundEffect;
+     private string[] collisionTags = { "Trap", "FallDetector" };
 
     // Start is called before the first frame update
     private void Start()
@@ -20,7 +22,7 @@ public class PlayerLife : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
-        if(obj.CompareTag("Trap"))
+        if (collisionTags.Contains(obj.tag))
         {
             PlayerDeath();
         }
