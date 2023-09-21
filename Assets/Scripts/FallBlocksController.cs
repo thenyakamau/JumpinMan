@@ -5,6 +5,7 @@ using UnityEngine;
 public class FallBlocksController : MonoBehaviour
 {
     [SerializeField] private float fallDelay = 1f;
+    [SerializeField] private float destroyDelay = 2f;
 
     private Rigidbody2D rBody;
 
@@ -17,19 +18,13 @@ public class FallBlocksController : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
         if (obj.name == "Player")
-        {
             StartCoroutine(FallingBlock());
-        }
-
-        if (obj.CompareTag("FallDetector"))
-        {
-            Destroy(gameObject);
-        }
     }
 
     private IEnumerator FallingBlock()
     {
         yield return new WaitForSeconds(fallDelay);
         rBody.bodyType = RigidbodyType2D.Dynamic;
+        Destroy(gameObject, destroyDelay);
     }
 }

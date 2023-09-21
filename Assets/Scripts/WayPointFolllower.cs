@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WayPointFolllower : MonoBehaviour
 {
     [SerializeField] private GameObject[] waypoints;
-    private int currentWayPointIndex = 0;
 
     [SerializeField] private float speed = 2f;
+    [SerializeField] private bool isDelay = false;
+
+    private int currentWayPointIndex = 0;
+    private float delayTime = .5f;
+
+    private bool playingDelay = false;
 
     // Update is called once per frame
     private void Update()
@@ -21,9 +27,31 @@ public class WayPointFolllower : MonoBehaviour
 
             if (currentWayPointIndex >= waypoints.Length)
                 currentWayPointIndex = 0;
+
         }
 
+        if (isDelay && distance < 1.08f)
+        {
+            if (!playingDelay)
+            {
+                StartCoroutine(ControlDecent(position));
+                playingDelay = true;
+            }
+            
+        }
+        else SetPosition(position);
+    }
+
+    private IEnumerator ControlDecent(Vector2 currentPosition)
+    {
+        yield return new WaitForSeconds(delayTime);
+        SetPosition(currentPosition);
+        playingDelay = false;
+    }
+
+    private void SetPosition(Vector2 currentPosition)
+    {
         float distanceTraveled = Time.deltaTime * speed;
-        transform.position = Vector2.MoveTowards(transform.position, position, distanceTraveled);
+        transform.position = Vector2.MoveTowards(transform.position, currentPosition, distanceTraveled);
     }
 }

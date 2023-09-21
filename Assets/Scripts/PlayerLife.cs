@@ -10,7 +10,7 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rigidbodyItem;
 
     [SerializeField] AudioSource deathSoundEffect;
-     private string[] collisionTags = { "Trap", "FallDetector" };
+    [SerializeField] private string[] collisionTags = { "Trap", "FallDetector" };
 
     // Start is called before the first frame update
     private void Start()
@@ -19,10 +19,21 @@ public class PlayerLife : MonoBehaviour
         rigidbodyItem = GetComponent<Rigidbody2D>();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject obj = collision.gameObject;
+        CheckCollissionType(obj.tag);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         GameObject obj = collision.gameObject;
-        if (collisionTags.Contains(obj.tag))
+        CheckCollissionType(obj.tag);
+    }
+
+    private void CheckCollissionType(string collissionTag)
+    {
+        if (collisionTags.Contains(collissionTag))
         {
             PlayerDeath();
         }
