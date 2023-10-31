@@ -52,9 +52,9 @@ ExportedObj/
 *.VC.db
 
 # Unity3D generated meta files
-*.pidb.meta
-*.pdb.meta
-*.mdb.meta
+# *.pidb.meta
+# *.pdb.meta
+# *.mdb.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -147,7 +147,7 @@ StyleCopReport.xml
 *_p.c
 *_h.h
 *.ilk
-*.meta
+# *.meta
 *.obj
 *.iobj
 *.pch

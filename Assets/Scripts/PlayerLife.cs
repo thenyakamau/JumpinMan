@@ -31,6 +31,12 @@ public class PlayerLife : MonoBehaviour
         CheckCollissionType(obj.tag);
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        GameObject obj = collision.gameObject;
+        CheckCollissionType(obj.tag);
+    }
+
     private void CheckCollissionType(string collissionTag)
     {
         if (collisionTags.Contains(collissionTag))
